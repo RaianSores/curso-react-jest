@@ -6,6 +6,7 @@ import { Posts } from '../../components/Posts';
 import { loadPosts } from '../../utils/load-posts';
 import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TexInput';
+import { Heading } from '../../components/Heading';
 
 export const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -48,20 +49,23 @@ export const Home = () => {
     : posts;
 
   return (
-    <section className="container">
-      <div className="search-container">
-        {!!searchValue && <h1>Digite o nome do produto que deseja encontrar: {searchValue}</h1>}
+    <>
+      <Heading />
+      <section className="container">
+        <div className="search-container">
+          {!!searchValue && <h1>Consulta de posts: {searchValue}</h1>}
 
-        <TextInput searchValue={searchValue} handleChange={handleChange} />
-      </div>
+          <TextInput searchValue={searchValue} handleChange={handleChange} />
+        </div>
 
-      {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
+        {filteredPosts.length > 0 && <Posts posts={filteredPosts} />}
 
-      {filteredPosts.length === 0 && <p>Desculpa, não encontramos produtos com esse nome!</p>}
+        {filteredPosts.length === 0 && <p>Desculpa, não encontramos posts com esse nome!</p>}
 
-      <div className="button-container">
-        {!searchValue && <Button text="Load more posts" onClick={loadMorePosts} disabled={noMorePosts} />}
-      </div>
-    </section>
+        <div className="button-container">
+          {!searchValue && <Button text="Load more posts" onClick={loadMorePosts} disabled={noMorePosts} />}
+        </div>
+      </section>
+    </>
   );
 };
